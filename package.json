@@ -1,5 +1,5 @@
 {
-  "name": "mocha",
+  "name": "vitaq-mocha",
   "version": "8.3.1",
   "description": "simple, flexible, fun test framework",
   "keywords": [
@@ -25,17 +25,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mochajs/mocha.git"
+    "url": "https://github.com/RossVertizan/vitaq-mocha/vitaq-mocha.git"
   },
   "bugs": {
     "url": "https://github.com/mochajs/mocha/issues/"
   },
-  "homepage": "https://mochajs.org/",
+  "homepage": "https://github.com/RossVertizan/vitaq-mocha",
   "logo": "https://cldup.com/S9uQ-cOLYz.svg",
   "notifyLogo": "https://ibin.co/4QuRuGjXvl36.png",
   "bin": {
-    "mocha": "./bin/mocha",
-    "_mocha": "./bin/_mocha"
+    "mocha": "./bin/vitaq-mocha",
+    "_mocha": "./bin/_vitaq-mocha"
   },
   "directories": {
     "lib": "./lib",
