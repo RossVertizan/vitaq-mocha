@@ -1,6 +1,6 @@
 {
   "name": "vitaq-mocha",
-  "version": "8.3.2",
+  "version": "8.3.4",
   "description": "Fork of Mocha to enable Vitaq",
   "keywords": [
     "mocha",
@@ -156,8 +156,8 @@
     "lib/**/*.{js,html,json}",
     "index.js",
     "mocha.css",
-    "vitaq-mocha.js",
-    "vitaq-mocha.js.map",
+    "mocha.js",
+    "mocha.js.map",
     "browser-entry.js"
   ],
   "browser": {

@@ -5,8 +5,6 @@ docs/images/supporters
 docs/api
 mocha.js
 mocha.js.map
-vitaq-mocha.js
-vitaq-mocha.js.map
 .karma/
 !lib/mocha.js
 
