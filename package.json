@@ -1,27 +1,16 @@
 {
   "name": "vitaq-mocha",
-  "version": "8.3.1",
-  "description": "simple, flexible, fun test framework",
+  "version": "8.3.2",
+  "description": "Fork of Mocha to enable Vitaq",
   "keywords": [
     "mocha",
-    "test",
-    "bdd",
-    "tdd",
-    "tap",
-    "testing",
-    "chai",
-    "assertion",
-    "ava",
-    "jest",
-    "tape",
-    "jasmine",
-    "karma"
+    "vitaq"
   ],
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/mochajs"
   },
-  "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "author": "Ross Addinall <ross@vertizan.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,8 +23,8 @@
   "logo": "https://cldup.com/S9uQ-cOLYz.svg",
   "notifyLogo": "https://ibin.co/4QuRuGjXvl36.png",
   "bin": {
-    "mocha": "./bin/vitaq-mocha",
-    "_mocha": "./bin/_vitaq-mocha"
+    "mocha": "./bin/mocha",
+    "_mocha": "./bin/_mocha"
   },
   "directories": {
     "lib": "./lib",
@@ -167,8 +156,8 @@
     "lib/**/*.{js,html,json}",
     "index.js",
     "mocha.css",
-    "mocha.js",
-    "mocha.js.map",
+    "vitaq-mocha.js",
+    "vitaq-mocha.js.map",
     "browser-entry.js"
   ],
   "browser": {

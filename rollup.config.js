@@ -14,10 +14,10 @@ import pickFromPackageJson from './scripts/pick-from-package-json';
 const config = {
   input: './browser-entry.js',
   output: {
-    file: './mocha.js',
+    file: './vitaq-mocha.js',
     format: 'umd',
     sourcemap: true,
-    name: 'mocha',
+    name: 'vitaq-mocha',
     intro: 'var regeneratorRuntime;'
   },
   plugins: [
