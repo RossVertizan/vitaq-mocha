@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+// const fs = require('fs');
 
 /**
  * Generates a command to run mocha tests with or without test coverage
@@ -34,11 +35,40 @@ function test(testName, mochaParams) {
   } ${mochaCommand} ${mochaParams}`.trim();
 }
 
+// function addStrict(filePath) {
+//   console.log('addStrict');
+//   let fileContent = fs.readFileSync(filePath).toString();
+//   fileContent = '"use strict"\n' + fileContent;
+//   fs.appendFileSync(filePath, fileContent);
+// }
+//
+// function addStrictCaller() {
+//   return "addStrict('lib/version.js')";
+// }
+
 module.exports = {
   scripts: {
     build: {
-      script: `rollup -c`,
-      description: 'Build browser bundle'
+      default: {
+        script: `nps build.rollup`,
+        description: 'Build the code and update the version number'
+      },
+      // version: {
+      //   script: `nps build.genversion build.fixversion`,
+      //   description: 'Update the version number'
+      // },
+      // genversion: {
+      //   script: `genversion -s lib/version.js`,
+      //   description: 'Update the version number'
+      // },
+      // fixversion: {
+      //   script: `addStrict('lib/version.js')`,
+      //   description: 'Fix the version'
+      // },
+      rollup: {
+        script: `rollup -c`,
+        description: 'Build browser bundle'
+      }
     },
     lint: {
       default: {
