@@ -1,6 +1,6 @@
 {
   "name": "vitaq-mocha",
-  "version": "8.3.4",
+  "version": "8.3.8",
   "description": "Fork of Mocha to enable Vitaq",
   "keywords": [
     "mocha",
@@ -99,6 +99,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "fail-on-errors-webpack-plugin": "^3.0.0",
     "fs-extra": "^9.0.1",
+    "genversion": "^2.3.1",
     "husky": "^4.2.5",
     "hyperlink": "^4.5.2",
     "jsdoc": "^3.6.5",
