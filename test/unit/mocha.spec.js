@@ -44,7 +44,11 @@ describe('Mocha', function() {
 
   beforeEach(function() {
     reporterInstance = {};
-    opts = {reporter: sinon.stub().returns(reporterInstance)};
+    // TEST CHANGES FOR VITAQ_MOCHA
+    opts = {
+      reporter: sinon.stub().returns(reporterInstance),
+      standardMocha: true
+    };
 
     // NOTE: calling `stub(someObject, someFunction)` where `someFunction` has
     // its own static properties WILL NOT blast those static properties!
@@ -107,7 +111,12 @@ describe('Mocha', function() {
     });
 
     it('should set _cleanReferencesAfterRun to true', function() {
-      expect(new Mocha()._cleanReferencesAfterRun, 'to be', true);
+      expect(
+        // TEST CHANGES FOR VITAQ_MOCHA
+        new Mocha({standardMocha: true})._cleanReferencesAfterRun,
+        'to be',
+        true
+      );
     });
 
     describe('when `timeout` option is `undefined`', function() {
@@ -229,7 +238,8 @@ describe('Mocha', function() {
     var mocha;
 
     beforeEach(function() {
-      mocha = new Mocha(opts);
+      // TEST CHANGES FOR VITAQ_MOCHA
+      mocha = new Mocha({...opts, standardMocha: true});
     });
 
     describe('allowUncaught()', function() {
@@ -298,7 +308,9 @@ describe('Mocha', function() {
     describe('cleanReferencesAfterRun()', function() {
       it('should set the _cleanReferencesAfterRun attribute', function() {
         mocha.cleanReferencesAfterRun();
-        expect(mocha._cleanReferencesAfterRun, 'to be', true);
+        // TEST CHANGES FOR VITAQ_MOCHA
+        // Changed the default to false
+        expect(mocha._cleanReferencesAfterRun, 'to be', false);
       });
 
       it('should set the _cleanReferencesAfterRun attribute to false', function() {

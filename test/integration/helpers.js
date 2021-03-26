@@ -213,6 +213,8 @@ function defaultArgs(args = [DEFAULT_FIXTURE_PATH]) {
   if (!newArgs.some(arg => /--(no-)?parallel/.test(arg))) {
     newArgs.push('--no-parallel');
   }
+  // TEST CHANGES FOR VITAQ_MOCHA
+  newArgs.push('--standard-mocha');
   return newArgs;
 }
 
@@ -312,10 +314,12 @@ function createSubprocess(args, done, opts = {}) {
   // prevent DEBUG from borking STDERR when piping, unless explicitly set via `opts`
   delete env.DEBUG;
 
+  // TEST CHANGES FOR VITAQ_MOCHA
   opts = {
     cwd: process.cwd(),
     stdio: ['inherit', 'pipe', 'inherit'],
     env,
+    standardMocha: true,
     ...opts
   };
 
