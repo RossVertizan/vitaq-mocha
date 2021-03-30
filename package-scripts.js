@@ -30,6 +30,8 @@ function test(testName, mochaParams) {
   if (process.env.CI) {
     mochaParams += ' --color'; // force color in CI
   }
+  // ... and always add standard-mocha to make vitaq-mocha look like mocha
+  mochaParams += ' --standard-mocha';
   return `${
     process.env.COVERAGE ? coverageCommand : ''
   } ${mochaCommand} ${mochaParams}`.trim();
@@ -153,6 +155,10 @@ module.exports = {
             'unit',
             '"test/unit/*.spec.js" "test/node-unit/**/*.spec.js" --growl'
           ),
+          description: 'Run Node.js unit tests'
+        },
+        unit_runner: {
+          script: test('unit', '"test/unit/runner.spec.js" --growl'),
           description: 'Run Node.js unit tests'
         },
         integration: {
