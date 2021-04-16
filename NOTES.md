@@ -20,8 +20,8 @@ npm install @wdio/vitaq-mocha-framework@<version> --registry http://localhost:48
 
 or manually with:
 
-```nod
-
+```node
+npm install vitaq-mocha@<version> --registry http://localhost:4873--save-dev
 ```
 
 ### Changes made to facilitate vitaq-mocha
