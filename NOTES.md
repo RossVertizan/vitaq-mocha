@@ -1,18 +1,38 @@
-<pre>================================================================================
-                           15:21 - 26/03/2021
-================================================================================</pre>
+### How to build
 
-`npm publish --registry http://localhost:4873`
+Commit the any changes.
 
-#### Changes made to facilitate vitaq-mocha
+Then publish, this will run the test and build process:
 
-##### Options
+```node
+npm publish --registry http://localhost:4873
+```
+
+Then run the npm version command to update the version for further modifications
+
+### How to install
+
+Installed as part of wdio-vitaq-mocha-framework:
+
+```node
+npm install @wdio/vitaq-mocha-framework@<version> --registry http://localhost:4873--save-dev
+```
+
+or manually with:
+
+```nod
+
+```
+
+### Changes made to facilitate vitaq-mocha
+
+#### Options
 
 - showMochaDetails - Prints a banner to prove we are using vitaq-mocha and shows version number
 - standardMocha: true - switches to default Mocha mode - used in the testing
 - cleanReferencesAfterRun - now defaults to false, set to true to avoid reference being retained
 - nextSuiteSelectFunction - the function to call - currently cannot be reached
 
-##### Selector function signature
+#### Selector function signature
 
 vitaq.nextActionSelector(suite, curr);
