@@ -15,13 +15,13 @@ Then run the npm version command to update the version for further modifications
 Installed as part of wdio-vitaq-mocha-framework:
 
 ```node
-npm install @wdio/vitaq-mocha-framework@<version> --registry http://localhost:4873--save-dev
+npm install @wdio/vitaq-mocha-framework@<version> --registry http://localhost:4873 --save-dev
 ```
 
 or manually with:
 
 ```node
-npm install vitaq-mocha@<version> --registry http://localhost:4873--save-dev
+npm install vitaq-mocha@<version> --registry http://localhost:4873 --save-dev
 ```
 
 ### Changes made to facilitate vitaq-mocha
@@ -36,3 +36,7 @@ npm install vitaq-mocha@<version> --registry http://localhost:4873--save-dev
 #### Selector function signature
 
 vitaq.nextActionSelector(suite, curr);
+
+### TODO LIST
+
+1. Need to add error/exception handlin capability for tests that fail in Mocha. Need to make sure we don't leave the Vitaq end hanging.
