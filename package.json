@@ -36,7 +36,6 @@
     "test.node.unit": "nps test.node.unit",
     "test.node.unit_runner": "nps test.node.unit_runner",
     "test.node.integration": "nps test.node.integration",
-    "version": "nps version",
     "test:smoke": "node ./bin/mocha --no-config test/smoke/smoke.spec.js",
     "test:integration-color": "node ./bin/mocha test/integration/color.spec.js"
   },
