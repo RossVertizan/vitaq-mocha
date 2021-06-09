@@ -6,10 +6,6 @@
     "mocha",
     "vitaq"
   ],
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/mochajs"
-  },
   "author": "Ross Addinall <ross@vertizan.com>",
   "license": "MIT",
   "repository": {
