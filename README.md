@@ -2,6 +2,8 @@
 
 # Vitaq-Mocha
 
+<!-- markdownlint-disable-next-line -->
+
 **A fork of the Mocha test framework which works with Vitaq AI**
 
 ## Description
