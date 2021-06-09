@@ -337,11 +337,11 @@ module.exports = {
     linkifyChangelog: {
       script: 'node scripts/linkify-changelog.js',
       description: 'Add/update GitHub links in CHANGELOG.md'
-    },
-    version: {
-      script:
-        'nps updateAuthors && nps linkifyChangelog && git add -A ./AUTHORS ./CHANGELOG.md',
-      description: 'Tasks to perform when `npm version` is run'
     }
+    // version: {
+    //   script:
+    //     'nps updateAuthors && nps linkifyChangelog && git add -A ./AUTHORS ./CHANGELOG.md',
+    //   description: 'Tasks to perform when `npm version` is run'
+    // }
   }
 };
