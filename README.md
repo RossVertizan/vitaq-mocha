@@ -1,14 +1,12 @@
+<!-- markdownlint-disable -->
+
 ![vitaq logo](https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png)
 
 ![mocha logo](https://cldup.com/xFVFxOioAU.svg)
 
 # Vitaq-Mocha
 
-<!-- markdownlint-enable MD036 -->
-
 **A fork of the Mocha test framework which works with Vitaq AI**
-
-<!-- markdownlint-enable -->
 
 ## Description
 
