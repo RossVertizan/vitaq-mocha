@@ -1,6 +1,6 @@
 ### How to build
 
-Commit the any changes.
+Commit any changes.
 
 Then publish, this will run the test and build process:
 

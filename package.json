@@ -1,7 +1,7 @@
 {
   "name": "vitaq-mocha",
   "version": "8.3.13",
-  "description": "Fork of Mocha to enable Vitaq",
+  "description": "Fork of Mocha to enable Vitaq to run in the Mocha environment",
   "keywords": [
     "mocha",
     "vitaq"
@@ -17,11 +17,11 @@
     "url": "https://github.com/RossVertizan/vitaq-mocha/vitaq-mocha.git"
   },
   "bugs": {
-    "url": "https://github.com/mochajs/mocha/issues/"
+    "url": "https://github.com/RossVertizan/vitaq-mocha/issues"
   },
   "homepage": "https://github.com/RossVertizan/vitaq-mocha",
-  "logo": "https://cldup.com/S9uQ-cOLYz.svg",
-  "notifyLogo": "https://ibin.co/4QuRuGjXvl36.png",
+  "logo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
+  "notifyLogo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
   "bin": {
     "mocha": "./bin/mocha",
     "_mocha": "./bin/_mocha"
@@ -186,7 +186,6 @@
     "bracketSpacing": false,
     "endOfLine": "auto"
   },
-  "gitter": "https://gitter.im/mochajs/mocha",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
