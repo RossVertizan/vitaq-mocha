@@ -1,14 +1,32 @@
-### How to build
+### How to publish
 
-Commit any changes.
+#### Commit
 
-Then publish, this will run the test and build process:
+Commit the changes
+
+#### Tag
+
+Update the version number
+
+```node
+npm version <version number>
+```
+
+#### Publish
+
+Then publish to the registry:
 
 ```node
 npm publish --registry http://localhost:4873
 ```
 
-Then run the npm version command to update the version for further modifications
+Can also publish to the cloud repository:
+
+```node
+npm publish --registry https://pkgs.vitaq.online
+```
+
+This will run the test and build process.
 
 ### How to install
 
