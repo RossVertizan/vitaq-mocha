@@ -1,6 +1,6 @@
 {
   "name": "vitaq-mocha",
-  "version": "8.3.17",
+  "version": "8.3.18",
   "description": "Fork of Mocha to enable Vitaq to run in the Mocha environment",
   "keywords": [
     "mocha",
