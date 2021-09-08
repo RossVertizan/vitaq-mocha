@@ -8,8 +8,8 @@ Mocha is a feature-rich JavaScript test framework running on [Node.js][] and in 
 
 <nav class="badges">
   <a href="https://gitter.im/mochajs/mocha"><img src="/images/join-chat.svg" height="18" alt="Gitter"></a>
-  <a href="#sponsors"><img src="https://opencollective.com/mochajs/sponsors/badge.svg" height="18" alt="OpenCollective sponsors"></a>
-  <a href="#backers"><img src="https://opencollective.com/mochajs/backers/badge.svg" height="18" alt="OpenCollective backers"></a>
+  <a href="#sponsors"><img src="https://opencollective.com/mochajs/tiers/sponsors/badge.svg" height="18" alt="OpenCollective sponsors"></a>
+  <a href="#backers"><img src="https://opencollective.com/mochajs/tiers/backers/badge.svg" height="18" alt="OpenCollective backers"></a>
 </nav>
 
 {% include supporters.md %}
@@ -64,7 +64,7 @@ or as a development dependency for your project:
 $ npm install --save-dev mocha
 ```
 
-> As of v8.0.0, Mocha requires Node.js v10.12.0 or newer.
+> As of v9.0.0, Mocha requires Node.js v12.0.0 or newer.
 
 ## Getting Started
 
@@ -116,7 +116,7 @@ $ npm test
 
 ## Run Cycle Overview
 
-> Updated for v9.0.0.
+> Updated for v8.0.0.
 
 The following is a mid-level outline of Mocha's "flow of execution" when run in Node.js; the "less important" details have been omitted.
 
@@ -684,7 +684,7 @@ Given Mocha's use of function expressions to define suites and test cases, it's 
 Take the following example:
 
 ```js
-const assert = require('chai').assert;
+const assert = require('assert');
 
 function add(args) {
   return args.reduce((prev, curr) => prev + curr, 0);
@@ -700,7 +700,7 @@ describe('add()', function() {
   tests.forEach(({args, expected}) => {
     it(`correctly adds ${args.length} args`, function() {
       const res = add(args);
-      assert.equal(res, expected);
+      assert.strictEqual(res, expected);
     });
   });
 });
@@ -725,12 +725,40 @@ describe('add()', function() {
   const testAdd = ({args, expected}) =>
     function() {
       const res = add(args);
-      assert.equal(res, expected);
+      assert.strictEqual(res, expected);
     };
 
   it('correctly adds 2 args', testAdd({args: [1, 2], expected: 3}));
   it('correctly adds 3 args', testAdd({args: [1, 2, 3], expected: 6}));
   it('correctly adds 4 args', testAdd({args: [1, 2, 3, 4], expected: 10}));
+});
+```
+
+With `top-level await` you can collect your test data in a dynamic and asynchronous way while the test file is being loaded:
+
+```js
+// testfile.mjs
+import assert from 'assert';
+
+// top-level await: Node >= v14.8.0 with ESM test file
+const tests = await new Promise(resolve => {
+  setTimeout(() => {
+    resolve([
+      {args: [1, 2], expected: 3},
+      {args: [1, 2, 3], expected: 6},
+      {args: [1, 2, 3, 4], expected: 10}
+    ]);
+  }, 5000);
+});
+
+// in suites ASYNCHRONOUS callbacks are NOT supported
+describe('add()', function() {
+  tests.forEach(({args, expected}) => {
+    it(`correctly adds ${args.length} args`, function() {
+      const res = args.reduce((sum, curr) => sum + curr, 0);
+      assert.strictEqual(res, expected);
+    });
+  });
 });
 ```
 
@@ -846,6 +874,10 @@ Use this option to have Mocha check for global variables that are leaked while r
 
 > _`--compilers` was removed in v6.0.0. See [further explanation and workarounds][mocha-wiki-compilers]._
 
+### `--dry-run`
+
+> _New in v9.0.0_ Report tests without executing any of them, neither tests nor hooks.
+
 ### `--exit`
 
 > _Updated in v4.0.0._
@@ -866,6 +898,10 @@ To ensure your tests aren't leaving messes around, here are some ideas to get st
 - Use the new [`async_hooks`][node-async-hooks] API ([example][gist-async-hooks])
 - Try something like [wtfnode][npm-wtfnode]
 - Use [`.only`](#exclusive-tests) until you find the test that causes Mocha to hang
+
+### `--fail-zero`
+
+> _New in v9.1.0_ Fail test run if no tests are encountered with `exit-code: 1`.
 
 ### `--forbid-only`
 
@@ -905,13 +941,13 @@ Note: A test that executes for _half_ of the "slow" time will be highlighted _in
 
 ### `--timeout <ms>, -t <ms>`
 
-> _Update in v6.0.0: `--no-timeout` is implied when invoking Mocha using inspect flags. It is equivalent to `--timeout 0`. `--timeout 99999999` is no longer needed._
+> _Update in v6.0.0: `--timeout 0` is implied when invoking Mocha using inspect flags. `--timeout 99999999` is no longer needed._
 
 Specifies the test case timeout, defaulting to two (2) seconds (2000 milliseconds). Tests taking longer than this amount of time will be marked as failed.
 
 To override you may pass the timeout in milliseconds, or a value with the `s` suffix, e.g., `--timeout 2s` and `--timeout 2000` are equivalent.
 
-To disable timeouts, use `--no-timeout`.
+To disable timeouts, use `--timeout 0`.
 
 Note: synchronous (blocking) tests are also bound by the timeout, but they will not complete until the code stops blocking. Infinite loops will still be infinite loops!
 
@@ -975,11 +1011,20 @@ Can be specified as a comma-delimited list.
 
 ### `--config <path>`
 
-> _New in v6.0.0._
+> _New in v6.0.0_
 
 Specify an explicit path to a [configuration file](#configuring-mocha-nodejs).
 
 By default, Mocha will search for a config file if `--config` is not specified; use `--no-config` to suppress this behavior.
+
+### `--node-option <name>, -n <name>`
+
+> _New in v9.1.0_
+
+For Node.js and V8 options. Mocha forwards these options to Node.js by spawning a new child-process.<br>
+The options are set without leading dashes `--`, e.g. `-n require=foo -n unhandled-rejections=strict`
+
+Can also be specified as a comma-delimited list: `-n require=foo,unhandled-rejections=strict`
 
 ### `--opts <path>`
 
@@ -987,7 +1032,7 @@ By default, Mocha will search for a config file if `--config` is not specified; 
 
 ### `--package <path>`
 
-> _New in v6.0.0._
+> _New in v6.0.0_
 
 Specify an explicit path to a [`package.json` file](#configuring-mocha-nodejs) (ostensibly containing configuration in a `mocha` property).
 
@@ -1001,7 +1046,7 @@ Specifying `--extension` will _remove_ `.js` as a test file extension; use `--ex
 
 The option can be given multiple times. The option accepts a comma-delimited list: `--extension a,b` is equivalent to `--extension a --extension b`.
 
-> _New in v8.2.0._
+> _New in v8.2.0_
 
 `--extension` now supports multipart extensions (e.g., `spec.js`), leading dots (`.js`) and combinations thereof (`.spec.js`);
 
@@ -1037,7 +1082,6 @@ Require a module before loading the user interface or test files. This is useful
 
 - Test harnesses
 - Assertion libraries that augment built-ins or global scope (such as [should.js][npm-should.js])
-- Instant ECMAScript modules via [esm][npm-esm]
 - Compilers such as Babel via [@babel/register][npm-babel-register] or TypeScript via [ts-node][npm-ts-node] (using `--require ts-node/register`). See [Babel][example-babel] or [TypeScript][example-typescript] working examples.
 
 Modules required in this manner are expected to do work synchronously; Mocha won't wait for async tasks in a required module to finish.
@@ -1098,9 +1142,12 @@ Cause Mocha to only run tests matching the given `regexp`, which is internally c
 
 Suppose, for example, you have "api" related tests, as well as "app" related tests, as shown in the following snippet; One could use `--grep api` or `--grep app` to run one or the other. The same goes for any other part of a suite or test-case title, `--grep users` would be valid as well, or even `--grep GET`.
 
+And another option with double quotes: `--grep "groupA|groupB"`.<br>
+And for more complex criterias: `--grep "/get/i"`. Some shells as e.g. Git-Bash-for-Windows may require: `--grep "'/get/i'"`. Using flags other than the `ignoreCase /i` (especially `/g` and `/y`) may lead to unpredictable results.
+
 ```js
 describe('api', function() {
-  describe('GET /api/users', function() {
+  describe('GET /api/users groupA', function() {
     it('respond with an array of users', function() {
       // ...
     });
@@ -1108,7 +1155,7 @@ describe('api', function() {
 });
 
 describe('app', function() {
-  describe('GET /users', function() {
+  describe('GET /users groupB', function() {
     it('respond with an array of users', function() {
       // ...
     });
@@ -1126,8 +1173,6 @@ Requires either `--grep` or `--fgrep` (but not both).
 
 ### `--inspect, --inspect-brk, inspect`
 
-> _BREAKING CHANGE in v7.0.0; `--debug` / `--debug-brk` are removed and `debug` is deprecated._
-
 Enables Node.js' inspector.
 
 Use `--inspect` / `--inspect-brk` to launch the V8 inspector for use with Chrome Dev Tools.
@@ -1136,7 +1181,7 @@ Use `inspect` to launch Node.js' internal debugger.
 
 All of these options are mutually exclusive.
 
-Implies `--no-timeout`.
+Implies `--timeout 0`.
 
 ### `--parallel, -p`
 
@@ -1176,6 +1221,8 @@ These flags vary depending on your version of Node.js.
 
 `node` flags can be defined in Mocha's [configuration](#configuring-mocha-nodejs).
 
+> _New in v9.1.0_ You can also pass `node` flags to Node.js using [`--node-option`](#-node-option-name-n-name).
+
 ### `--enable-source-maps`
 
 > _New in Node.js v12.12.0_
@@ -1194,6 +1241,8 @@ Error: cool
 Prepend `--v8-` to any flag listed in the output of `node --v8-options` (excluding `--v8-options` itself) to use it.
 
 V8 flags can be defined in Mocha's [configuration](#configuring-mocha-nodejs).
+
+> _New in v9.1.0_ You can also pass V8 flags (without `--v8-`) to Node.js using [`--node-option`](#-node-option-name-n-name).
 
 ## Parallel Tests
 
@@ -1324,7 +1373,7 @@ It's unlikely (but not impossible) to see a performance gain from a [job count](
 
 ## Root Hook Plugins
 
-> _New in v8.0.0._
+> _New in v8.0.0_
 
 In some cases, you may want a [hook](#hooks) before (or after) every test in every file. These are called _root hooks_. Previous to v8.0.0, the way to accomplish this was to use `--file` combined with root hooks (see [example above](#root-hooks-are-not-global)). This still works in v8.0.0, but _not_ when running tests in parallel mode! For that reason, running root hooks using this method is _strongly discouraged_, and may be deprecated in the future.
 
@@ -1548,7 +1597,7 @@ If you're a library maintainer, and your library uses root hooks, you can migrat
 
 ## Global Fixtures
 
-> New in v8.2.0
+> _New in v8.2.0_
 
 At first glance, _global fixtures_ seem similar to [root hooks](#root-hook-plugins). However, unlike root hooks, global fixtures:
 
@@ -1884,6 +1933,8 @@ Alias: `JSON`, `json`
 
 The JSON reporter outputs a single large JSON object when the tests have completed (failures or not).
 
+By default, it will output to the console. To write directly to a file, use `--reporter-option output=filename.json`.
+
 ![json reporter](images/reporter-json.png?withoutEnlargement&resize=920,9999){:class="screenshot" loading="lazy"}
 
 ### JSON Stream
@@ -2006,20 +2057,15 @@ this means either ending the file with a `.mjs` extension, or, if you want to us
 adding `"type": "module"` to your `package.json`.
 More information can be found in the [Node.js documentation](https://nodejs.org/api/esm.html).
 
-> Mocha supports ES modules only from Node.js v12.11.0 and above. To enable this in versions smaller than 13.2.0, you need to add `--experimental-modules` when running
-> Mocha. From version 13.2.0 of Node.js, you can use ES modules without any flags.
-> (Mocha _will_ load ESM even in Node v10, but this is not officially supported. Use at your own risk.)
-
 ### Current Limitations
-
-Node.JS native ESM support still has status: **Stability: 1 - Experimental**
 
 - [Watch mode](#-watch-w) does not support ES Module test files
 - [Custom reporters](#third-party-reporters) and [custom interfaces](#interfaces)
   can only be CommonJS files
 - [Configuration file](#configuring-mocha-nodejs) can only be a CommonJS file (`.mocharc.js` or `.mocharc.cjs`)
-- When using module-level mocks via libs like `proxyquire`, `rewiremock` or `rewire`, hold off on using ES modules for your test files
-- Node.JS native ESM support does not work with [esm][npm-esm] module
+- When using module-level mocks via libs like `proxyquire`, `rewiremock` or `rewire`,
+  hold off on using ES modules for your test files. You can switch to using `testdouble`,
+  which does support ESM.
 
 ## Running Mocha in the Browser
 
@@ -2080,6 +2126,8 @@ mocha.setup({
   asyncOnly: true,
   bail: true,
   checkLeaks: true,
+  dryRun: true,
+  failZero: true,
   forbidOnly: true,
   forbidPending: true,
   global: ['MyLib'],
@@ -2237,7 +2285,7 @@ Configurations can inherit from other modules using the `extends` keyword. See [
 
 ## The `test/` Directory
 
-By default, `mocha` looks for the glob `"./test/*.js"`, so you may want to put
+By default, `mocha` looks for the glob `"./test/*.{js,cjs,mjs}"`, so you may want to put
 your tests in `test/` folder. If you want to include subdirectories, pass the
 `--recursive` option.
 
@@ -2268,15 +2316,15 @@ _Note_: Double quotes around the glob are recommended for portability.
 
 When Mocha itself throws exception, the associated `Error` will have a `code` property. Where applicable, consumers should check the `code` property instead of string-matching against the `message` property. The following table describes these error codes:
 
-| Code                             | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| ERR_MOCHA_INVALID_ARG_TYPE       | wrong type was passed for a given argument                   |
-| ERR_MOCHA_INVALID_ARG_VALUE      | invalid or unsupported value was passed for a given argument |
-| ERR_MOCHA_INVALID_EXCEPTION      | a falsy or otherwise underspecified exception was thrown     |
-| ERR_MOCHA_INVALID_INTERFACE      | interface specified in options not found                     |
-| ERR_MOCHA_INVALID_REPORTER       | reporter specified in options not found                      |
-| ERR_MOCHA_NO_FILES_MATCH_PATTERN | test file(s) could not be found                              |
-| ERR_MOCHA_UNSUPPORTED            | requested behavior, option, or parameter is unsupported      |
+| Code                               | Description                                                  |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `ERR_MOCHA_INVALID_ARG_TYPE`       | wrong type was passed for a given argument                   |
+| `ERR_MOCHA_INVALID_ARG_VALUE`      | invalid or unsupported value was passed for a given argument |
+| `ERR_MOCHA_INVALID_EXCEPTION`      | a falsy or otherwise underspecified exception was thrown     |
+| `ERR_MOCHA_INVALID_INTERFACE`      | interface specified in options not found                     |
+| `ERR_MOCHA_INVALID_REPORTER`       | reporter specified in options not found                      |
+| `ERR_MOCHA_NO_FILES_MATCH_PATTERN` | test file(s) could not be found                              |
+| `ERR_MOCHA_UNSUPPORTED`            | requested behavior, option, or parameter is unsupported      |
 
 ## Editor Plugins
 
@@ -2398,7 +2446,6 @@ or the [source](https://github.com/mochajs/mocha/blob/master/lib/mocha.js).
 [npm]: https://npmjs.org/
 [npm-babel-register]: https://npm.im/@babel/register
 [npm-chai-as-promised]: https://www.npmjs.com/package/chai-as-promised
-[npm-esm]: https://npm.im/esm
 [npm-glob]: https://www.npmjs.com/package/glob
 [npm-growl]: https://npm.im/growl
 [npm-mocha-lcov-reporter]: https://npm.im/mocha-lcov-reporter

@@ -164,6 +164,34 @@ describe('Base reporter', function() {
         '      \n      actual expected\n      \n      a foobar inline diff\n      '
       );
     });
+
+    it("should truncate overly long 'actual' ", function() {
+      var actual = '';
+      var i = 0;
+      while (i++ < 120) {
+        actual += 'a foo unified diff ';
+      }
+      var expected = 'a bar unified diff';
+
+      inlineDiffsStub.value(false);
+      var output = generateDiff(actual, expected);
+
+      expect(output, 'to match', / \.\.\. Lines skipped/);
+    });
+
+    it("should truncate overly long 'expected' ", function() {
+      var actual = 'a foo unified diff';
+      var expected = '';
+      var i = 0;
+      while (i++ < 120) {
+        expected += 'a bar unified diff ';
+      }
+
+      inlineDiffsStub.value(false);
+      var output = generateDiff(actual, expected);
+
+      expect(output, 'to match', / \.\.\. Lines skipped/);
+    });
   });
 
   describe('inline strings diff', function() {
@@ -366,22 +394,24 @@ describe('Base reporter', function() {
     expect(errOut, 'to be', '1) test title:\n     Error\n  foo\n  bar');
   });
 
-  it("should use 'inspect' if 'message' is not set", function() {
-    var err = {
-      showDiff: false,
-      inspect: function() {
-        return 'an error happened';
-      }
+  it("should use 'inspect' if 'inspect' and 'message' are set", function() {
+    var err = new Error('test');
+    err.showDiff = false;
+    err.message = 'error message';
+    err.inspect = function() {
+      return 'Inspect Error';
     };
+
     var test = makeTest(err);
 
     list([test]);
 
     var errOut = stdout.join('\n').trim();
-    expect(errOut, 'to be', '1) test title:\n     an error happened');
+
+    expect(errOut, 'to contain', 'Inspect Error');
   });
 
-  it("should set an empty message if neither 'message' nor 'inspect' is set", function() {
+  it("should set an empty message if neither 'inspect' nor 'message' is set", function() {
     var err = {
       showDiff: false
     };

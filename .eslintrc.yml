@@ -12,6 +12,7 @@ parserOptions:
     jsx: false
   sourceType: script
 rules:
+  no-var: 0
   strict:
     - error
     - safe
@@ -35,13 +36,15 @@ overrides:
     env:
       browser: false
   - files:
-      - esm-utils.js
+      - lib/nodejs/esm-utils.js
       - rollup.config.js
+      - rollup_no-ie11.config.js
       - scripts/pick-from-package-json.js
     parserOptions:
       ecmaVersion: 2018
       sourceType: module
-    parser: babel-eslint
+      requireConfigFile: false # for @babel/eslint-parser
+    parser: '@babel/eslint-parser'
     env:
       browser: false
   - files:

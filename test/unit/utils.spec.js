@@ -2,7 +2,6 @@
 'use strict';
 
 var utils = require('../../lib/utils');
-const errors = require('../../lib/errors');
 var sinon = require('sinon');
 
 describe('lib/utils', function() {
@@ -324,7 +323,7 @@ describe('lib/utils', function() {
     });
 
     it('should handle various non-undefined, non-null, non-object, non-array, non-date, and non-function values', function() {
-      var regexp = new RegExp('(?:)');
+      var regexp = /(?:)/;
       var regExpObj = {regexp: regexp};
       var regexpString = '/(?:)/';
 
@@ -670,24 +669,6 @@ describe('lib/utils', function() {
     });
   });
 
-  describe('sQuote()', function() {
-    var str = 'xxx';
-
-    it('should return its input as string wrapped in single quotes', function() {
-      var expected = "'xxx'";
-      expect(utils.sQuote(str), 'to be', expected);
-    });
-  });
-
-  describe('dQuote()', function() {
-    var str = 'xxx';
-
-    it('should return its input as string wrapped in double quotes', function() {
-      var expected = '"xxx"';
-      expect(utils.dQuote(str), 'to be', expected);
-    });
-  });
-
   describe('createMap()', function() {
     it('should return an object with a null prototype', function() {
       expect(Object.getPrototypeOf(utils.createMap()), 'to be', null);
@@ -775,51 +756,6 @@ describe('lib/utils', function() {
     describe('when provided null', function() {
       it('should return an array containing a null value only', function() {
         expect(utils.castArray(null), 'to equal', [null]);
-      });
-    });
-  });
-
-  describe('lookupFiles()', function() {
-    beforeEach(function() {
-      sinon.stub(errors, 'deprecate');
-    });
-
-    describe('when run in Node.js', function() {
-      before(function() {
-        if (process.browser) {
-          return this.skip();
-        }
-      });
-
-      beforeEach(function() {
-        sinon.stub(utils, 'isBrowser').returns(false);
-        sinon.stub(require('../../lib/cli'), 'lookupFiles').returns([]);
-      });
-
-      it('should print a deprecation message', function() {
-        utils.lookupFiles();
-        expect(errors.deprecate, 'was called once');
-      });
-
-      it('should delegate to new location of lookupFiles()', function() {
-        utils.lookupFiles(['foo']);
-        expect(
-          require('../../lib/cli').lookupFiles,
-          'to have a call satisfying',
-          [['foo']]
-        ).and('was called once');
-      });
-    });
-
-    describe('when run in browser', function() {
-      beforeEach(function() {
-        sinon.stub(utils, 'isBrowser').returns(true);
-      });
-
-      it('should throw', function() {
-        expect(() => utils.lookupFiles(['foo']), 'to throw', {
-          code: 'ERR_MOCHA_UNSUPPORTED'
-        });
       });
     });
   });
