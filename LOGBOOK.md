@@ -1,5 +1,9 @@
+<!-- markdownlint-disable -->
+
 ---
+
 ## 26/03/2021
+
 ### 15:21
 
 `npm publish --registry http://localhost:4873`
@@ -16,7 +20,6 @@
 ##### Selector function signature
 
 vitaq.nextActionSelector(suite, curr);
-
 
 ---## 07/09/2021
 
