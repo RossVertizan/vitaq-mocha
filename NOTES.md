@@ -1,3 +1,23 @@
+### How to sync with original mocha
+
+The original Git repository is listed as a remote
+
+```shell
+git remote -v
+```
+
+#### Steps to sync with original
+
+1. Make sure that everything is committed in the local repo - `git status`
+2. Check the branch - `git branch -v`
+3. Fetch the upstream changes (from the original repo) - `git fetch upstream`
+4. Pull from the upstream to the branch - `git pull upstream master`
+5. Go through the merge process and resolve any conflicts
+6. Run the pre-publish checks - `npm run prepublishOnly`
+7. When all checks passing can be committed and published.
+8. Perform standard Vitaq end-to-end tests with this installed to make sure everything is working as expected
+9. Update the comment in the README.md about the latest merge version
+
 ### How to publish
 
 #### Commit

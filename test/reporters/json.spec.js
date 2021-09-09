@@ -19,7 +19,8 @@ describe('JSON reporter', function() {
 
   beforeEach(function() {
     mocha = new Mocha({
-      reporter: 'json'
+      reporter: 'json',
+      standardMocha: true
     });
     suite = new Suite('JSON suite', 'root');
     runner = new Runner(suite);
@@ -212,11 +213,11 @@ describe('JSON reporter', function() {
         );
         expect(fsWriteFileSync.calledOnce, 'to be true');
         expect(
-          outLog[0],
+          outLog[2],
           'to contain',
           `[mocha] writing output to "${expectedFileName}" failed:`
         );
-        expect(outLog[1], 'to match', /"fullTitle": "JSON suite json test 1"/);
+        expect(outLog[3], 'to match', /"fullTitle": "JSON suite json test 1"/);
         done();
       });
     });
