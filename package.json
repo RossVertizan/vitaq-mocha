@@ -1,5 +1,5 @@
 {
-  "name": "vitaq-mocha",
+  "name": "vitaqai-mocha",
   "version": "9.1.1",
   "description": "Fork of Mocha to enable Vitaq to run in the Mocha environment",
   "keywords": [
@@ -10,12 +10,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RossVertizan/vitaq-mocha/vitaq-mocha.git"
+    "url": "https://github.com/RossVertizan/vitaqai-mocha/vitaqai-mocha.git"
   },
   "bugs": {
-    "url": "https://github.com/RossVertizan/vitaq-mocha/issues"
+    "url": "https://github.com/RossVertizan/vitaqai-mocha/issues"
   },
-  "homepage": "https://github.com/RossVertizan/vitaq-mocha",
+  "homepage": "https://github.com/RossVertizan/vitaqai-mocha",
   "logo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
   "notifyLogo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
   "bin": {
@@ -154,7 +154,7 @@
     "bin/*mocha",
     "assets/growl/*.png",
     "lib/**/*.{js,html,json}",
-    "lib/vitaq-mocha.d.ts",
+    "lib/vitaqai-mocha.d.ts",
     "index.js",
     "mocha.css",
     "mocha.js",

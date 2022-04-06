@@ -29,7 +29,7 @@ function test(testName, mochaParams) {
   if (process.env.CI) {
     mochaParams += ' --color'; // force color in CI
   }
-  // ... and always add standard-mocha to make vitaq-mocha look like mocha
+  // ... and always add standard-mocha to make vitaqai-mocha look like mocha
   mochaParams += ' --standard-mocha';
   return `${
     process.env.COVERAGE ? coverageCommand : ''

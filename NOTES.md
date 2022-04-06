@@ -50,23 +50,23 @@ This will run the test and build process.
 
 ### How to install
 
-Installed as part of wdio-vitaq-mocha-framework:
+Installed as part of wdio-vitaqai-mocha-framework:
 
 ```node
-npm install @wdio/vitaq-mocha-framework@<version> --registry http://localhost:4873 --save-dev
+npm install wdio-vitaqai-mocha-framework@<version> --registry http://localhost:4873 --save-dev
 ```
 
 or manually with:
 
 ```node
-npm install vitaq-mocha@<version> --registry http://localhost:4873 --save-dev
+npm install vitaqai-mocha@<version> --registry http://localhost:4873 --save-dev
 ```
 
-### Changes made to facilitate vitaq-mocha
+### Changes made to facilitate vitaqai-mocha
 
 #### Options
 
-- showMochaDetails - Prints a banner to prove we are using vitaq-mocha and shows version number
+- showMochaDetails - Prints a banner to prove we are using vitaqai-mocha and shows version number
 - standardMocha: true - switches to default Mocha mode - used in the testing
 - cleanReferencesAfterRun - now defaults to false, set to true to avoid reference being retained
 - nextSuiteSelectFunction - the function to call - currently cannot be reached
