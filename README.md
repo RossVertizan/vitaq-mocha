@@ -16,7 +16,7 @@ This is a fork of the Mocha testing environment which allows it to work with [Vi
 
 ## Installation
 
-This is one of a number of packages that are required to integrate WebdriverIO with Mocha and Vitaq and is installed as a dependency of the wdio-vitaqai-mocha-framework package. See the installation instructions for that package.
+This is one of a number of packages that are required to integrate WebdriverIO with Mocha and Vitaq and is installed as a dependency of the wdio-vitaqai-service package. See the installation instructions for that package.
 
 If you just want to do an incremental upgrade of this package, then it can be done with npm:
 
