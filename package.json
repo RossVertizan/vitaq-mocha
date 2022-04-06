@@ -1,6 +1,6 @@
 {
   "name": "vitaqai-mocha",
-  "version": "9.1.1",
+  "version": "9.1.2",
   "description": "Fork of Mocha to enable VitaqAI to run in the Mocha environment",
   "keywords": [
     "mocha",
