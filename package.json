@@ -10,12 +10,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RossVertizan/vitaqai-mocha/vitaqai-mocha.git"
+    "url": "https://github.com/RossVertizan/vitaq-mocha/vitaq-mocha.git"
   },
   "bugs": {
-    "url": "https://github.com/RossVertizan/vitaqai-mocha/issues"
+    "url": "https://github.com/RossVertizan/vitaq-mocha/issues"
   },
-  "homepage": "https://github.com/RossVertizan/vitaqai-mocha",
+  "homepage": "https://github.com/RossVertizan/vitaq-mocha",
   "logo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
   "notifyLogo": "https://vitaq.io/wp-content/uploads/2020/10/Vitaq-new-logo-small.png",
   "bin": {
