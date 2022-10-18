@@ -46,6 +46,12 @@ Can also publish to the cloud repository:
 npm publish --registry https://pkgs.vitaq.online
 ```
 
+Or to the NPM registry for public availability
+
+```node
+npm publish --registry https://registry.npmjs.org
+```
+
 This will run the test and build process.
 
 ### How to install
