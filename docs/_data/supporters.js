@@ -18,7 +18,7 @@
 'use strict';
 
 const {loadImage} = require('canvas');
-const {writeFile, mkdir, rmdir} = require('fs').promises;
+const {writeFile, mkdir, rm} = require('fs').promises;
 const {resolve} = require('path');
 const debug = require('debug')('mocha:docs:data:supporters');
 const needle = require('needle');
@@ -52,7 +52,7 @@ const SPONSOR_TIER = 'sponsors';
 const BACKER_TIER = 'backers';
 
 // if this percent of fetches completes, the build will pass
-const PRODUCTION_SUCCESS_THRESHOLD = 0.8;
+const PRODUCTION_SUCCESS_THRESHOLD = 0.9;
 
 const SUPPORTER_IMAGE_PATH = resolve(__dirname, '../images/supporters');
 
@@ -107,7 +107,7 @@ const fetchImage = process.env.MOCHA_DOCS_SKIP_IMAGE_DOWNLOAD
       try {
         const {avatar: url} = supporter;
         const {body: imageBuf, headers} = await needle('get', url, {
-          timeout: 2000
+          open_timeout: 30000
         });
         if (headers['content-type'].startsWith('text/html')) {
           throw new TypeError(
@@ -225,7 +225,7 @@ const getSupporters = async () => {
       }
     );
 
-  await rmdir(SUPPORTER_IMAGE_PATH, {recursive: true});
+  await rm(SUPPORTER_IMAGE_PATH, {recursive: true, force: true});
   debug('blasted %s', SUPPORTER_IMAGE_PATH);
   await mkdir(SUPPORTER_IMAGE_PATH, {recursive: true});
   debug('created %s', SUPPORTER_IMAGE_PATH);
@@ -247,30 +247,34 @@ const getSupporters = async () => {
 
   const backerCount = supporters[BACKER_TIER].length;
   const sponsorCount = supporters[SPONSOR_TIER].length;
-  const totalValidSupportersCount = backerCount + sponsorCount;
-  const successRate = totalValidSupportersCount / invalidSupporters.length;
+  const totalSupportersCount = backerCount + sponsorCount;
+  const successRate = 1 - invalidSupporters.length / totalSupportersCount;
 
   debug(
     'found %d valid backers and %d valid sponsors (%d total; %d invalid; %d blocked)',
     backerCount,
     sponsorCount,
-    totalValidSupportersCount,
+    totalSupportersCount,
     invalidSupporters.length,
-    uniqueSupporters.size - totalValidSupportersCount
+    uniqueSupporters.size - totalSupportersCount
   );
 
   if (successRate < PRODUCTION_SUCCESS_THRESHOLD) {
     if (process.env.NETLIFY && process.env.CONTEXT !== 'deploy-preview') {
       throw new Error(
-        `Failed to meet success threshold ${PRODUCTION_SUCCESS_THRESHOLD *
-          100}% (was ${successRate *
-          100}%) for a production deployment; refusing to deploy`
+        `Failed to meet success threshold ${
+          PRODUCTION_SUCCESS_THRESHOLD * 100
+        }% (was ${
+          successRate * 100
+        }%) for a production deployment; refusing to deploy`
       );
     } else {
       console.warn(
-        `WARNING: Success rate of ${successRate *
-          100}% fails to meet production threshold of ${PRODUCTION_SUCCESS_THRESHOLD *
-          100}%; would fail a production deployment!`
+        `WARNING: Success rate of ${
+          successRate * 100
+        }% fails to meet production threshold of ${
+          PRODUCTION_SUCCESS_THRESHOLD * 100
+        }%; would fail a production deployment!`
       );
     }
   }

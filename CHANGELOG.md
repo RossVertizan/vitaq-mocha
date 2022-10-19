@@ -1,3 +1,105 @@
+# 10.1.0 / 2022-10-16
+
+## :tada: Enhancements
+
+- [#4896](https://github.com/mochajs/mocha/issues/4896): Browser: add support for `prefers-color-scheme: dark` ([**@greggman**](https://github.com/greggman))
+
+## :nut_and_bolt: Other
+
+- [#4912](https://github.com/mochajs/mocha/issues/4912): Browser: increase contrast for replay buttons ([**@JoshuaKGoldberg**](https://github.com/JoshuaKGoldberg))
+- [#4905](https://github.com/mochajs/mocha/issues/4905): Use standard `Promise.allSettled` instead of polyfill ([**@outsideris**](https://github.com/outsideris))
+- [#4899](https://github.com/mochajs/mocha/issues/4899): Upgrade official GitHub actions to latest ([**@ddzz**](https://github.com/ddzz))
+- [#4770](https://github.com/mochajs/mocha/issues/4770): Fix regex in function `clean`([**@yetingli**](https://github.com/yetingli))
+
+# 10.0.0 / 2022-05-01
+
+## :boom: Breaking Changes
+
+- [#4845](https://github.com/mochajs/mocha/issues/4845): **Drop Node.js v12.x support** ([**@juergba**](https://github.com/juergba))
+
+- [#4848](https://github.com/mochajs/mocha/issues/4848): Drop Internet-Explorer-11 support ([**@juergba**](https://github.com/juergba))
+
+- [#4857](https://github.com/mochajs/mocha/issues/4857): Drop AMD/RequireJS support ([**@juergba**](https://github.com/juergba))
+
+- [#4866](https://github.com/mochajs/mocha/issues/4866): Drop Growl notification support ([**@juergba**](https://github.com/juergba))
+
+- [#4863](https://github.com/mochajs/mocha/issues/4863): Rename executable `bin/mocha` to `bin/mocha.js` ([**@juergba**](https://github.com/juergba))
+
+- [#4865](https://github.com/mochajs/mocha/issues/4865): `--ignore` option in Windows: upgrade Minimatch ([**@juergba**](https://github.com/juergba))
+
+- [#4861](https://github.com/mochajs/mocha/issues/4861): Remove deprecated `Runner` signature ([**@juergba**](https://github.com/juergba))
+
+## :nut_and_bolt: Other
+
+- [#4878](https://github.com/mochajs/mocha/issues/4878): Update production dependencies ([**@juergba**](https://github.com/juergba))
+
+- [#4876](https://github.com/mochajs/mocha/issues/4876): Add Node.js v18 to CI test matrix ([**@outsideris**](https://github.com/outsideris))
+
+- [#4852](https://github.com/mochajs/mocha/issues/4852): Replace deprecated `String.prototype.substr()` ([**@CommanderRoot**](https://github.com/CommanderRoot))
+
+Also thanks to [**@ea2305**](https://github.com/ea2305) and [**@SukkaW**](https://github.com/SukkaW) for improvements to our documentation.
+
+# 9.2.2 / 2022-03-11
+
+## :bug: Fixes
+
+- [#4842](https://github.com/mochajs/mocha/issues/4842): Loading of reporter throws wrong error ([**@juergba**](https://github.com/juergba))
+
+- [#4839](https://github.com/mochajs/mocha/issues/4839): `dry-run`: prevent potential call-stack crash ([**@juergba**](https://github.com/juergba))
+
+## :nut_and_bolt: Other
+
+- [#4843](https://github.com/mochajs/mocha/issues/4843): Update production dependencies ([**@juergba**](https://github.com/juergba))
+
+# 9.2.1 / 2022-02-19
+
+## :bug: Fixes
+
+- [#4832](https://github.com/mochajs/mocha/issues/4832): Loading of config files throws wrong error ([**@juergba**](https://github.com/juergba))
+
+- [#4799](https://github.com/mochajs/mocha/issues/4799): Reporter: configurable `maxDiffSize` reporter-option ([**@norla**](https://github.com/norla))
+
+# 9.2.0 / 2022-01-24
+
+## :tada: Enhancements
+
+- [#4813](https://github.com/mochajs/mocha/issues/4813): Parallel: assign each worker a worker-id ([**@forty**](https://github.com/forty))
+
+## :nut_and_bolt: Other
+
+- [#4818](https://github.com/mochajs/mocha/issues/4818): Update production dependencies ([**@juergba**](https://github.com/juergba))
+
+# 9.1.4 / 2022-01-14
+
+## :bug: Fixes
+
+- [#4807](https://github.com/mochajs/mocha/issues/4807): `import` throws wrong error if loader is used ([**@giltayar**](https://github.com/giltayar))
+
+## :nut_and_bolt: Other
+
+- [#4777](https://github.com/mochajs/mocha/issues/4777): Add Node v17 to CI test matrix ([**@outsideris**](https://github.com/outsideris))
+
+# 9.1.3 / 2021-10-15
+
+## :bug: Fixes
+
+- [#4769](https://github.com/mochajs/mocha/issues/4769): Browser: re-enable `bdd` ES6 style import ([**@juergba**](https://github.com/juergba))
+
+## :nut_and_bolt: Other
+
+- [#4764](https://github.com/mochajs/mocha/issues/4764): Revert deprecation of `EVENT_SUITE_ADD_*` events ([**@beatfactor**](https://github.com/beatfactor))
+
+# 9.1.2 / 2021-09-25
+
+## :bug: Fixes
+
+- [#4746](https://github.com/mochajs/mocha/issues/4746): Browser: stop using all global vars in `browser-entry.js` ([**@PaperStrike**](https://github.com/PaperStrike))
+
+## :nut_and_bolt: Other
+
+- [#4754](https://github.com/mochajs/mocha/issues/4754): Remove dependency wide-align ([**@juergba**](https://github.com/juergba))
+- [#4736](https://github.com/mochajs/mocha/issues/4736): ESM: remove code for Node versions <10 ([**@juergba**](https://github.com/juergba))
+
 # 9.1.1 / 2021-08-28
 
 ## :bug: Fixes
@@ -158,12 +260,12 @@ Here's a short example of usage:
 // fixtures.js
 
 // can be async or not
-exports.mochaGlobalSetup = async function() {
+exports.mochaGlobalSetup = async function () {
   this.server = await startSomeServer({port: process.env.TEST_PORT});
   console.log(`server running on port ${this.server.port}`);
 };
 
-exports.mochaGlobalTeardown = async function() {
+exports.mochaGlobalTeardown = async function () {
   // the context (`this`) is shared, but not with the test files
   await this.server.stop();
   console.log(`server on port ${this.server.port} stopped`);
@@ -455,7 +557,7 @@ Mocha supports writing your test files as ES modules:
 - [#3980](https://github.com/mochajs/mocha/issues/3980): Refactor and improve `--watch` mode with chokidar ([**@geigerzaehler**](https://github.com/geigerzaehler)):
   - adds command-line options `--watch-files` and `--watch-ignore`
   - removes `--watch-extensions`
-- [#3979](https://github.com/mochajs/mocha/issues/3979): Type "rs\\n" to restart tests ([**@broofa**](https://github.com/broofa))
+- [#3979](https://github.com/mochajs/mocha/issues/3979): Type "rs\n" to restart tests ([**@broofa**](https://github.com/broofa))
 
 ## :fax: Deprecations
 

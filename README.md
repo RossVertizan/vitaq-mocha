@@ -8,7 +8,7 @@
 
 **A fork of the Mocha test framework which works with Vitaq AI**
 
-Most recent merge with Mocha was at Mocha v9.1.1
+Most recent merge with Mocha was at Mocha v10.1.0
 
 ## Description
 

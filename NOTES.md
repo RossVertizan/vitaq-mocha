@@ -1,3 +1,5 @@
+<!-- markdownlint-disable -->
+
 ### How to sync with original mocha
 
 The original Git repository is listed as a remote
@@ -17,6 +19,16 @@ git remote -v
 7. When all checks passing can be committed and published.
 8. Perform standard Vitaq end-to-end tests with this installed to make sure everything is working as expected
 9. Update the comment in the README.md about the latest merge version
+
+##### Notes on above
+
+1. Had to use:
+
+```shell
+git config --global url."https://".insteadOf git://
+```
+
+before the `git fetch upstream` would [work.](https://stackoverflow.com/questions/16298986/unable-to-connect-to-github-com-for-cloning)
 
 ### How to publish
 

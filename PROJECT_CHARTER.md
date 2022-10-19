@@ -1,3 +1,5 @@
+<!-- markdownlint-disable -->
+
 # Mocha Charter
 
 This project charter serves as a statement of scope and objectives for the **Mocha** project.
